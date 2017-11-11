@@ -38,7 +38,7 @@ CharacterList.append(temp)
 attacked = False
 @ask.launch
 def launched():
-    return question('Welcome to Alexa of Rings, would you like to a start')
+    return question('Welcome to Alexa of Rings, would you like to start a new game')
 
 @ask.intent('StartGame')
 def startGame():
@@ -62,7 +62,7 @@ def characterCreated(firstname,charatype):
 
 @ask.intent('DontStartGame')
 def no():
-    return statement('Why did you open this app then')
+    return statement('Why did you open this app then!')
 
 @ask.intent('AdventureStart')
 def adventureStart():
@@ -80,7 +80,7 @@ def chooseStance(stance):
 
     if(CharacterList[0].stance == "NA"):
         CharacterList[0].stance = stance
-        return question('{} you have chosen to {}, {} choose you stance'.format(CharacterList[0].name,CharacterList[0].stance,CharacterList[1].name))
+        return question('{} you have chosen to {}, {} choose your stance'.format(CharacterList[0].name,CharacterList[0].stance,CharacterList[1].name))
     elif(CharacterList[1].stance == "NA"):
         CharacterList[1].stance = stance
         return question('{} you have chosen to {}, now to start battle'.format(CharacterList[1].name,CharacterList[1].stance))
@@ -91,7 +91,7 @@ def Battles():
     global attacked
 
     if(attacked == False):
-        print monster1.health
+        print (monster1.health)
         result = ""
         if(monster1.health>0 and CharacterList[0].stance != "NA" and CharacterList[1].stance != "NA"):
             if(CharacterList[0].stance == "attack"):
