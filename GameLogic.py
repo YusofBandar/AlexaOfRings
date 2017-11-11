@@ -4,10 +4,17 @@ from flask_ask import Ask, statement, question
 app = Flask(__name__)
 ask = Ask(app, '/AlexaOfRings')
 
-@ask.intent('Hello')
-def hello():
-    return "hello"
+playing = False;
 
+class Character:
+    name = ""
+    type = ""
+    health = 100
+    def __init__(self):
+       health = 100
+
+
+CharacterList = []
 
 @ask.launch
 def launched():
@@ -19,13 +26,19 @@ def startGame():
 
 @ask.intent('CharacterName')
 def characterName():
-    return question('What is you characters name and type, hobbit...dwarf...wizard?')
+    if(playing == False):
+        return question('What is you characters name and type, hobbit...dwarf...wizard?')
+    else:
+        return question('You cannot create a character mid-game')
 
 
 @ask.intent('CharacterCreated')
 def characterCreated(firstname,charatype):
-
-    return question('Hello {}, the great {}'.format(firstname, charatype))
+    temp = Character()
+    temp.name = firstname
+    temp.type = charatype
+    CharacterList.append(temp)
+    return question('Hello {}, the great {}, you can start adventure or create another character'.format(firstname, charatype),)
 
 
 @ask.intent('DontStartGame')
@@ -35,3 +48,5 @@ def no():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
