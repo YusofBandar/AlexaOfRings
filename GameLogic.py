@@ -11,22 +11,22 @@ def hello():
 
 @ask.launch
 def launched():
-    return question('Welcome to Alexa of Rings, would you like to a start game')
+    return question('Welcome to Alexa of Rings, would you like to a start')
 
 @ask.intent('StartGame')
-def yes():
+def startGame():
     return question('Before we begin you need to create a character')
 
 @ask.intent('CharacterName')
 def characterName():
-    return question('What is you characters name?')
+    return question('What is you characters name and type, hobbit...dwarf...wizard?')
 
 
 @ask.intent('CharacterCreated')
-def characterCreated(Names):
-    return question('You have created a character... do you want to create another character or start adventure')
+def characterCreated(firstname,charatype):
 
-@ask.intent('test')
+    return question('Hello {}, the great {}'.format(firstname, charatype))
+
 
 @ask.intent('DontStartGame')
 def no():
