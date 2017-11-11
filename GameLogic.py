@@ -13,9 +13,9 @@ player = -1
 class monster:
     name = ""
     level = 5
-    health = 0
+    health = 50
     def __init__(self):
-       health = 10*self.level
+       health = 50
 
 class Character:
     name = ""
@@ -31,11 +31,9 @@ CharacterList = []
 temp = Character()
 temp.name = "Dave"
 temp.type = "Hobbit"
-temp1 = Character()
-temp1.name = "Amy"
-temp1.type = "Wizard"
+temp.stance = "attack"
 CharacterList.append(temp)
-CharacterList.append(temp1)
+
 
 attacked = False
 @ask.launch
@@ -69,7 +67,7 @@ def no():
 @ask.intent('AdventureStart')
 def adventureStart():
     playing = True
-    return question('Both {} and {} start your adventure in the shire, both fighting giant rats, it is time for your first battle'.format(CharacterList[0].name,CharacterList[1].name))
+    return question('Both {} and {} start your adventure in the shire it is time for your first battle'.format(CharacterList[0].name,CharacterList[1].name))
 
 
 @ask.intent('BattleStart')
@@ -88,10 +86,12 @@ def chooseStance(stance):
         return question('{} you have chosen to {}, now to start battle'.format(CharacterList[1].name,CharacterList[1].stance))
     return question('now to start battle')
 
-@ask.intent('PlayerBattle')
-def playerBattle():
+@ask.intent('Battles')
+def Battles():
+    global attacked
 
     if(attacked == False):
+        print monster1.health
         result = ""
         if(monster1.health>0 and CharacterList[0].stance != "NA" and CharacterList[1].stance != "NA"):
             if(CharacterList[0].stance == "attack"):
@@ -106,7 +106,11 @@ def playerBattle():
             return statement('you have won battle')
         else:
             return question('need to pick stances')
-    elif()
+    elif(attacked == True and monster1.health > 0):
+        attacked = False
+        return question('monster attack')
+    else:
+        return question('done')
 
 
 if __name__ == '__main__':
