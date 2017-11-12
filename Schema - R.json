@@ -1,0 +1,53 @@
+{
+  "intents": [
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "DontStartGame"
+    },
+    {
+      "intent": "StartGame"
+    },
+    {
+      "intent": "CharacterName"
+    },
+    {
+      "slots": [
+        {
+          "name": "firstname",
+          "type": "Names"
+        },
+        {
+          "name": "charatype",
+          "type": "CharacterType"
+        }
+      ],
+      "intent": "CharacterCreated"
+    },
+    {
+      "intent": "AdventureStart"
+    },
+    {
+      "intent": "BattleStart"
+    },
+    {
+      "slots": [
+        {
+          "name": "stance",
+          "type": "Stance"
+        }
+      ],
+      "intent": "ChooseStance"
+    },
+    {
+      "intent": "Battles"
+    }
+  ]
+}
