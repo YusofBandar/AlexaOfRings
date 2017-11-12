@@ -35,6 +35,8 @@ temp.stance = "attack"
 CharacterList.append(temp)
 
 
+
+
 attacked = False
 @ask.launch
 def launched():
@@ -86,31 +88,44 @@ def chooseStance(stance):
         return question('{} you have chosen to {}, now to start battle'.format(CharacterList[1].name,CharacterList[1].stance))
     return question('now to start battle')
 
-@ask.intent('Battles')
-def Battles():
-    global attacked
 
-    if(attacked == False):
-        print monster1.health
-        result = ""
-        if(monster1.health>0 and CharacterList[0].stance != "NA" and CharacterList[1].stance != "NA"):
-            if(CharacterList[0].stance == "attack"):
+@ask.intent('Battles')
+def battles():
+    global attacked
+    print monster1.health
+    result = ""
+
+    if (attacked == False):
+        if (monster1.health > 0 and CharacterList[0].stance != "NA" and CharacterList[1].stance != "NA"):
+            if (CharacterList[0].stance == "attack"):
                 monster1.health = monster1.health - 20
-                result = result + "Dave attacks..."
-            if(CharacterList[1].stance == "attack"):
+                result = result + CharacterList[0].name + "attacks..."
+            if (CharacterList[1].stance == "attack"):
                 monster1.health = monster1.health - 20
-                result = result + "Amy attacks"
+                result = result + CharacterList[1].name + "attacks..."
             attacked = True
+            CharacterList[0].stance = "NA"
+            CharacterList[1].stance = "NA"
             return question(result + ' dealing great damage')
-        elif(monster1.health < 0):
+        elif (monster1.health < 0):
             return statement('you have won battle')
         else:
             return question('need to pick stances')
     elif(attacked == True and monster1.health > 0):
         attacked = False
-        return question('monster attack')
+        choice = 1;
+        if (choice == 1):
+            CharacterList[0].health = CharacterList[0].health - 10
+            return question('{} attacts {}'.format(monster1.name, CharacterList[0].name))
+        elif (choice == 2):
+            CharacterList[1].health = CharacterList[1].health - 10
+            return question('{} attacts {}'.format(monster1.name, CharacterList[1].name))
+        else:
+            return question('{} regen health'.format(monster1.name))
     else:
-        return question('done')
+        return question('You have won the battle well done')
+
+
 
 
 if __name__ == '__main__':
