@@ -57,7 +57,11 @@ y_pred = classifier.predict(X_test)
 y_pred = (y_pred > 0.5)
 
 
-new_prediction = classifier.predict(sc.transform(np.array([[0,1,1,0,0]])))
-new_prediction = (new_prediction > 0.5)
 
+
+def newPrediction(a,b,c,d,e):
+	global classifier
+	new_prediction = classifier.predict(sc.transform(np.array([[0,1,1,0,0]])))
+	return new_prediction = (new_prediction > 0.5)
+	
 
