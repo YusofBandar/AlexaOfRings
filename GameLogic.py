@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask_ask import Ask, statement, question
+from flask_ask import Ask, statement, question, convert_errors
 
 app = Flask(__name__)
 ask = Ask(app, '/AlexaOfRings')
